@@ -7,9 +7,9 @@ const currenciesList = document.querySelector(".currencies");
 // const dataURL = "https://api.exchangeratesapi.io/latest";
 
 // const dataURL = "http://localhost:5000/rates";
-// const dataURL = "https://karolio-keitykla.herokuapp.com/rates";
+const dataURL = "https://karolio-keitykla.herokuapp.com/rates";
 
-const dataURL = process.env.dataURL;
+// const dataURL = process.env.dataURL;
 
 const initialCurrencies = ["EUR", "USD", "GBP"];
 let baseCurrency;
