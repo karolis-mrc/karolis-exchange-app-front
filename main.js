@@ -12,7 +12,7 @@ const dataURL = "https://karolis-exchange-app-back.herokuapp.com/rates";
 
 // const dataURL = process.env.dataURL;
 
-const initialCurrencies = ["EUR", "USD", "GBP"];
+const initialCurrencies = ["EUR", "USD"];
 let baseCurrency;
 let baseCurrencyAmount;
 
