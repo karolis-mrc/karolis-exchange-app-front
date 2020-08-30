@@ -7,7 +7,7 @@ const currenciesList = document.querySelector(".currencies");
 // const dataURL = "https://api.exchangeratesapi.io/latest";
 
 // const dataURL = "http://localhost:5000/rates";
-const dataURL = "https://karolis-exchange-app-back.herokuapp.com/rates";
+const dataURL = "https://git.heroku.com/karolis-exchange-app-back.herokuapp.com/rates";
 
 // const dataURL = process.env.dataURL;
 
