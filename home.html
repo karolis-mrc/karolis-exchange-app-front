@@ -8,12 +8,17 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    
+   
     <div class="container">
+        <a class="login" href="https://www.facebook.com/v6.0/dialog/oauth?client_id=${appId}&r
+            edirect_uri=${encodeURIComponent('http://localhost:3000/oauth-redirect')}">
+            Log In With Facebook
+        </a>
         <div class="header">
             <h1>Currency Converter</h1>
         </div>
-        <div class="date"></div>
+        <div class="date">
+        </div>
         <ul class="currencies"></ul>
         <button class="add-currency-btn"><i class="fa fa-arrow-left" aria-hidden="true"></i>Add currency</button>
         <ul class="add-currency-list"></ul>
