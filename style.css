@@ -64,7 +64,7 @@ body {
 }
 
 ul.currencies {
-    height: calc(100vh - 40px - 100px - 40px - 58px);
+    height: calc(90vh - 40px - 100px - 40px - 58px);
     background-color: black;
     padding: 0 1.5rem 1rem 1.5rem;
     overflow-y: auto;
@@ -234,7 +234,7 @@ ul.add-currency-list li span {
 @media (max-width: 600px) {
     html { font-size: 14px;}
     .container {width: 100%; margin: 0 auto; }
-    ul.currencies { height: calc(100vh -83px -34px - 51px); }
+    ul.currencies { height: calc(90vh -83px -34px - 51px); }
     .header h1 { font-size: 2rem; }
     .flag { width: 3rem; height: 2rem; }
     .info .input span { font-size: 1rem; width: 80%; }
