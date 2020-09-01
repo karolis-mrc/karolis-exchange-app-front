@@ -1,5 +1,4 @@
 // Global Variables
-
 const addCurrencyBtn = document.querySelector(".add-currency-btn");
 const addCurrencyList = document.querySelector(".add-currency-list");
 const currenciesList = document.querySelector(".currencies");
@@ -230,7 +229,6 @@ let currencies = [
   ];
 
 // Event Listeners
-
 addCurrencyBtn.addEventListener("click", addCurrencyBtnClick);
 
 function addCurrencyBtnClick(event) {
