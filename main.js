@@ -4,7 +4,7 @@ const addCurrencyBtn = document.querySelector(".add-currency-btn");
 const addCurrencyList = document.querySelector(".add-currency-list");
 const currenciesList = document.querySelector(".currencies");
 
-// const logURL = "http://localhost:5000/log"
+// const logURL = "http://localhost:5000/log";
 // const dataURL = "http://localhost:5000/rates";
 const logURL = "https://karolis-exchange-app-back.herokuapp.com/log";
 const dataURL = "https://karolis-exchange-app-back.herokuapp.com/rates";
