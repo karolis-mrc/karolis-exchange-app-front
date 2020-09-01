@@ -6,7 +6,7 @@ const currenciesList = document.querySelector(".currencies");
 
 // const logURL = "http://localhost:5000/log"
 // const dataURL = "http://localhost:5000/rates";
-const dataURL = "https://karolis-exchange-app-back.herokuapp.com/log";
+const logURL = "https://karolis-exchange-app-back.herokuapp.com/log";
 const dataURL = "https://karolis-exchange-app-back.herokuapp.com/rates";
 // const dataURL = process.env.dataURL;
 
