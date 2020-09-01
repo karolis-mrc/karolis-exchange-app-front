@@ -4,12 +4,25 @@ const addCurrencyBtn = document.querySelector(".add-currency-btn");
 const addCurrencyList = document.querySelector(".add-currency-list");
 const currenciesList = document.querySelector(".currencies");
 
-// const dataURL = "https://api.exchangeratesapi.io/latest";
-
+// const logURL = "http://localhost:5000/log"
 // const dataURL = "http://localhost:5000/rates";
+const dataURL = "https://karolis-exchange-app-back.herokuapp.com/log";
 const dataURL = "https://karolis-exchange-app-back.herokuapp.com/rates";
-
 // const dataURL = process.env.dataURL;
+
+let loginStatus = 'LogedOut';
+const oBtn = document.getElementById("sOutBtn");
+const iBtn = document.getElementById("sInBtn");
+
+function showBtn(loginStatus) {
+  if (loginStatus === 'LogedIn') {
+    oBtn.style.display = "inline-block";
+    iBtn.style.display = "none";
+  } else {
+    oBtn.style.display = "none";
+    iBtn.style.display = "inline-block";
+  }
+}
 
 const initialCurrencies = ["EUR", "USD"];
 let baseCurrency;
@@ -300,13 +313,21 @@ function currenciesListKeyDown(event) {
     
 // Auxilary Functions
 function populateAllCurrencyList() {
-    for(let i=0; i<currencies.length; i++) {
-        addCurrencyList.insertAdjacentHTML(
-            "beforeend", 
-            `<li data-currency=${currencies[i].abbreviation}>
-                <img src=${currencies[i].flagURL} class="flag"><span>${currencies[i].abbreviation} - ${currencies[i].name}</span>
-            </li>`);
-    }
+  for (let i=0; i<currencies.length; i++) {
+      addCurrencyList.insertAdjacentHTML(
+          "beforeend", 
+          `<li data-currency=${currencies[i].abbreviation}>
+              <img src=${currencies[i].flagURL} class="flag"><span>${currencies[i].abbreviation} - ${currencies[i].name}</span>
+          </li>`);
+  }
+}
+
+function removeCurrencies () {
+  const ul = document.querySelector('.currencies');
+  const listLength = ul.children.length;
+  for (i = 0; i < listLength; i++) {
+    ul.removeChild(ul.children[0]);
+  }
 }
 
 function populateCurrenciesList() {
@@ -340,21 +361,45 @@ function newCurrenciesListItem(currency) {
     );
 }
 
-fetch(dataURL)
-    .then(res => {
-      console.log(res);
-      return res})
-    .then(res => res.json())
-    .then(data => {
-        document.querySelector(".date").textContent = "date of exchange rates : " + data.date;
-        data.rates["EUR"] = 1;
-        currencies = currencies.filter(currency => data.rates[currency.abbreviation]);
-        currencies.forEach(currency => currency.rate = data.rates[currency.abbreviation] )
-        populateAllCurrencyList();
-        populateCurrenciesList();
-    })
-    .catch(err => console.log(err));
+function fetchData (id_token) {
+  fetch(dataURL, {headers:{Authorization:`Bearer ${id_token}`}})
+  .then(res => res.json())
+  .then(data => {
+      document.querySelector(".date").textContent = "date of exchange rates : " + data.date;
+      data.rates["EUR"] = 1;
+      currencies = currencies.filter(currency => data.rates[currency.abbreviation]);
+      currencies.forEach(currency => currency.rate = data.rates[currency.abbreviation] )
+      populateAllCurrencyList();
+      populateCurrenciesList();
+  })
+  .catch(err => console.log(err));
+}
 
+function onSignIn(googleUser) {
+    const id_token = googleUser.getAuthResponse().id_token;
+    fetchData(id_token);
+    loginStatus = 'LogedIn';
+    showBtn(loginStatus);
+    sendToken(id_token);
+    }
+    function signOut() {
+    let auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut().then(function () {
+    id_token = undefined;
+    loginStatus = 'LogedOut';
+    showBtn(loginStatus);
+    removeCurrencies();
+    });
+}
 
-
-
+function sendToken(message) {
+  const id_token  = gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse(true).id_token;
+  fetch(logURL, {
+    method: 'POST',
+    headers: {
+      'Content-Type' : 'application/json',
+      Authorization:`Bearer ${id_token}`
+    },
+    body: JSON.stringify({message})
+  });
+}
